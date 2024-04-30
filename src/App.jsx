@@ -1,12 +1,17 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import DaftarAnime from './components/DaftarAnime'
+import Navbar from './components/Navbar';
 
 export default function App() {
 
   return (
     <BrowserRouter>
-      <h1>Paling Populer</h1>
+      <Navbar />
+      <div className='flex justify-between items-center p-4'>
+        <h1 className='text-xl font-medium'>Paling Populer</h1>
+        <Link to='/populer' className='text-xl'>Lihat Semua Anime</Link>
+      </div>
       <DaftarAnime />
     </BrowserRouter>
   )
