@@ -11,7 +11,6 @@ const DaftarAnime = ({ title, images }) => {
                 const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/top/anime?limit=8`);
                 const data = await response.json();
                 setAnime(data);
-                console.log(data);
             } catch (error) {
                 console.error('error fetchig data:', error);
             }
