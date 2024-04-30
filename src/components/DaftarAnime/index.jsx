@@ -8,7 +8,7 @@ const DaftarAnime = ({ title, images }) => {
     useEffect(() => {
         const fetchAnime = async () => {
             try {
-                const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/top/anime`);
+                const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/top/anime?limit=8`);
                 const data = await response.json();
                 setAnime(data);
                 console.log(data);
@@ -21,7 +21,7 @@ const DaftarAnime = ({ title, images }) => {
 
     return (
         <div className=''>
-            <div className='grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4'>
+            <div className='grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4 px-4'>
             {anime && anime.data && anime.data.map(data => {
                 return (
                     <div key={data.mal_id} className='shadow-xl '>
