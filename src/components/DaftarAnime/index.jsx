@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 const DaftarAnime = ({ title, images }) => {
     const [anime, setAnime] = useState(null);
@@ -23,8 +25,10 @@ const DaftarAnime = ({ title, images }) => {
             {anime && anime.data && anime.data.map(data => {
                 return (
                     <div key={data.mal_id} className='shadow-xl '>
-                        <img src={data.images.webp.image_url} alt="images" width={350} height={350} loading='lazy' />
-                        <h3 className='font-bold md:text-xl text-md p-4'>{data.title}</h3>
+                        <Link to={`/anime/${data.mal_id}`}>
+                            <img src={data.images.webp.image_url} alt="images" width={350} height={350} />
+                            <h3 className='font-bold md:text-xl text-md p-4'>{data.title}</h3>
+                        </Link>
                     </div>
                 );
             })}
