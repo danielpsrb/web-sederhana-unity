@@ -1,12 +1,13 @@
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import DaftarAnime from './components/DaftarAnime'
 
-
-function App() {
+export default function App() {
 
   return (
-    <>
-      <h1 className="text-red-500">Hello World</h1>
-    </>
+    <BrowserRouter>
+      <h1>Paling Populer</h1>
+      <DaftarAnime />
+    </BrowserRouter>
   )
 }
-
-export default App
