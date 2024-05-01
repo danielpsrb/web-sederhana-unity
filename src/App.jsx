@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import DaftarAnime from './components/DaftarAnime'
 import Header from './components/DaftarAnime/Header';
 import Navbar from './components/Navbar';
+import AnimeRecommendation from './components/RekomendasiAnime';
 
 export default function App() {
 
@@ -27,6 +28,7 @@ export default function App() {
         <Navbar />
         <Header />
         <DaftarAnime api={animeData} />
+        <AnimeRecommendation />
       </div>
     </BrowserRouter>
   )
