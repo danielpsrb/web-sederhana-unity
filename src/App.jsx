@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { getAnimeResponse, getTopManga } from './api/api-services'; // Mengimpor fungsi getAnimeResponse
 import DaftarAnime from './components/DaftarAnime';
 import Header from './components/DaftarAnime/Header';
 import Navbar from './components/Navbar';
 import DaftarManga from './components/DaftarManga';
-
+import Search from './pages/Search';
 
 export default function App() {
   const [animeData, setAnimeData] = useState("");
@@ -29,16 +29,23 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="dark:text-gray-100 dark:bg-slate-900 duration-100">
+      <div className="min-h-screen dark:text-gray-100 dark:bg-[#232323] duration-100">
         <Navbar />
-        <section>
-          <Header title="Top Anime" linkTitle="Lihat Semua" linkHref="/populer" />
-          <DaftarAnime api={animeData} />
-        </section>
-        <section>
-          <Header title="Top Manga" linkTitle="Lihat Semua" linkHref="/populer" />
-          <DaftarManga api={mangaData} />
-        </section>
+        <Routes>
+          <Route path="/" element={
+            <>
+              <section>
+                <Header title="Top Anime" linkTitle="See all Top Anime" linkHref="/populer" />
+                <DaftarAnime api={animeData} />
+              </section>
+              <section>
+                <Header title="Top Manga" />
+                <DaftarManga api={mangaData} />
+              </section>
+            </>
+          } />
+          <Route path="/search/:keyword" element={<Search />} /> {/* Menambahkan rute untuk Search */}
+        </Routes>
       </div>
     </BrowserRouter>
   );
