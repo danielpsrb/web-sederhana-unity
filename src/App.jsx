@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import DaftarAnime from './components/DaftarAnime'
+import { getAnimeResponse, getTopManga } from './api/api-services'; // Mengimpor fungsi getAnimeResponse
+import DaftarAnime from './components/DaftarAnime';
 import Header from './components/DaftarAnime/Header';
 import Navbar from './components/Navbar';
-import AnimeRecommendation from './components/RekomendasiAnime';
+import DaftarManga from './components/DaftarManga';
+
 
 export default function App() {
-
   const [animeData, setAnimeData] = useState("");
+  const [mangaData, setMangaData] = useState("");
 
   useEffect(() => {
-        const fetchAnime = async () => {
-            try {
-                const response = await fetch(`${import.meta.env.VITE_REACT_API_URL}/top/anime?limit=8`);
-                const topAnime = await response.json();
-                setAnimeData(topAnime);
-            } catch (error) {
-                console.error('error fetchig data:', error);
-            }
-        };
-        fetchAnime();
+    const fetchAnime = async () => {
+      try {
+        const topAnime = await getAnimeResponse('top/anime', 'limit=8');
+        setAnimeData(topAnime);
+
+        const topManga = await getTopManga();
+        setMangaData(topManga);
+
+      } catch (error) {
+        console.error('error fetching data:', error);
+      }
+    };
+    fetchAnime();
   }, []);
 
   return (
@@ -28,8 +33,8 @@ export default function App() {
         <Navbar />
         <Header />
         <DaftarAnime api={animeData} />
-        <AnimeRecommendation />
+        <DaftarManga api={mangaData} />
       </div>
     </BrowserRouter>
-  )
+  );
 }
