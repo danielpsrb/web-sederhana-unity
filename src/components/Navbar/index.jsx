@@ -53,7 +53,7 @@ const Navbar = () => {
     return (
         <header className='bg-indigo-400 dark:bg-[#FE8040]'>
             <div className='flex lg:flex-row flex-col justify-between p-4 items-center'>
-                <Link to='/' className='font-bold text-2xl text[#cccccc]'>RyotaAnime</Link>
+                <Link to='/' className='font-bold text-2xl text[#cccccc]'>DANS_ANIMELIST</Link>
                 <div className='flex items-center flex-col lg:flex-row'>
                     <InputSearchAnime />
                     <div className="lg:flex items-center">
