@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
+import InputSearchAnime from './InputSearchAnime';
 
 const Navbar = () => {
     const [theme, setTheme] = useState(
@@ -66,7 +67,7 @@ const Navbar = () => {
                             ></ion-icon>
                         </button>
                     ))}
-                    <input placeholder='cari anime..' className='w-80 md:w-auto p-2 pr-10' />
+                    <InputSearchAnime />
                 </div>
             </div>
         </header>
