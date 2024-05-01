@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { getAnimeResponse, getTopManga } from './api/api-services'; // Mengimpor fungsi getAnimeResponse
+import { getAnimeResponse, getTopManga, getAnimeRekomendasi, reproduce } from './api/api-services'; // Mengimpor fungsi getAnimeResponse
 import DaftarAnime from './components/DaftarAnime';
 import Header from './components/DaftarAnime/Header';
 import Navbar from './components/Navbar';
 import DaftarManga from './components/DaftarManga';
 import Search from './pages/Search';
+import AnimeRecommendation from './components/RekomendasiAnime';
 
 export default function App() {
   const [animeData, setAnimeData] = useState("");
   const [mangaData, setMangaData] = useState("");
+  const [rekomendasiAnimeData, setRekomendasiAnimeData] = useState("");
+
 
   useEffect(() => {
     const fetchAnime = async () => {
@@ -19,6 +22,10 @@ export default function App() {
 
         const topManga = await getTopManga();
         setMangaData(topManga);
+
+        let rekomendasiAnime = await getAnimeRekomendasi("recommendations/anime", "entry");
+        rekomendasiAnime = reproduce(rekomendasiAnime, 8)
+        setRekomendasiAnimeData(rekomendasiAnime);
 
       } catch (error) {
         console.error('error fetching data:', error);
@@ -41,6 +48,10 @@ export default function App() {
               <section>
                 <Header title="Top Manga" />
                 <DaftarManga api={mangaData} />
+              </section>
+              <section>
+                <Header title="Anime Recommendation" />
+                <AnimeRecommendation api={rekomendasiAnimeData} />
               </section>
             </>
           } />
