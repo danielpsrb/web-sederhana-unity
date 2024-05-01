@@ -8,7 +8,7 @@ const Header = ({ title, linkTitle, linkHref }) => {
             {
                 linkHref && linkTitle
                 ?
-                <Link to={linkHref} className='md:text-xl text-md'>{linkTitle}</Link>
+                <Link to={linkHref} className='md:text-xl text-md underline'>{linkTitle}</Link>
                 :
                 null
             }
