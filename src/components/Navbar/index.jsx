@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import InputSearchAnime from './InputSearchAnime';
 
 const Navbar = () => {
@@ -25,8 +25,7 @@ const Navbar = () => {
     ];
 
     function onWindowMatch() {
-        if (localStorage.theme === 'dark' || (!("theme" in localStorage) && darkQuery.matches) 
-        ) {
+        if (localStorage.theme === 'dark' || (!("theme" in localStorage) && darkQuery.matches)) {
             element.classList.add('dark');
         } else {
             element.classList.remove('dark');
@@ -49,29 +48,31 @@ const Navbar = () => {
                 onWindowMatch();
                 break;
         }
-    }, [theme])
+    }, [theme]);
 
     return (
-        <header className='bg-indigo-400 dark:bg-red-500'>
-            <div className='flex md:flex-row flex-col justify-between p-4 items-center'>
-                <Link to='/' className='font-bold text-2xl text-white'>DANS ANIME</Link>
-                <div className='flex items-center'>
-                    {options?.map(opt=>(
-                        <button 
-                            key={opt.text} 
-                            onClick={()=>setTheme(opt.text)}
-                            className={`w-8 h-8 leading-9 text-xl rounded-md m-1 mr-4 ${theme === opt.text && 'text-sky-500'} bg-slate-700`}
-                        >
-                            <ion-icon 
-                                name={opt.icon}
-                            ></ion-icon>
-                        </button>
-                    ))}
+        <header className='bg-indigo-400 dark:bg-[#FE8040]'>
+            <div className='flex lg:flex-row flex-col justify-between p-4 items-center'>
+                <Link to='/' className='font-bold text-2xl text[#cccccc]'>DANS ANIME</Link>
+                <div className='flex items-center flex-col lg:flex-row'>
                     <InputSearchAnime />
+                    <div className="lg:flex items-center">
+                        {options.map(opt => (
+                            <button
+                                key={opt.text}
+                                onClick={() => setTheme(opt.text)}
+                                className={`w-8 h-8 leading-9 text-xl rounded-md m-1 ${theme === opt.text && 'text-sky-500'} bg-[#FDFDFD] dark:bg-[#333] dark:text-[#f0f0f0]`}
+                            >
+                                <ion-icon
+                                    name={opt.icon}
+                                ></ion-icon>
+                            </button>
+                        ))}
+                    </div>
                 </div>
             </div>
         </header>
     )
 }
 
-export default Navbar
+export default Navbar;
