@@ -31,9 +31,14 @@ export default function App() {
     <BrowserRouter>
       <div className="dark:text-gray-100 dark:bg-slate-900 duration-100">
         <Navbar />
-        <Header />
-        <DaftarAnime api={animeData} />
-        <DaftarManga api={mangaData} />
+        <section>
+          <Header title="Top Anime" linkTitle="Lihat Semua" linkHref="/populer" />
+          <DaftarAnime api={animeData} />
+        </section>
+        <section>
+          <Header title="Top Manga" linkTitle="Lihat Semua" linkHref="/populer" />
+          <DaftarManga api={mangaData} />
+        </section>
       </div>
     </BrowserRouter>
   );
