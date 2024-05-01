@@ -8,9 +8,11 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Navbar />
-      <Header />
-      <DaftarAnime />
+      <div className="dark:text-gray-100 dark:bg-slate-900 duration-100">
+        <Navbar />
+        <Header />
+        <DaftarAnime />
+      </div>
     </BrowserRouter>
   )
 }
