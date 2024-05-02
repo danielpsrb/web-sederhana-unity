@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import DaftarManga from './components/DaftarManga';
 import Search from './pages/Search';
 import AnimeRecommendation from './components/RekomendasiAnime';
+import NotFound from './components/NotFound';
 
 export default function App() {
   const [animeData, setAnimeData] = useState("");
@@ -56,6 +57,7 @@ export default function App() {
             </>
           } />
           <Route path="/search/:keyword" element={<Search />} /> {/* Menambahkan rute untuk Search */}
+          <Route path="*" element={<NotFound />} /> {/* Menambahkan rute untuk NotFound */}
         </Routes>
       </div>
     </BrowserRouter>
