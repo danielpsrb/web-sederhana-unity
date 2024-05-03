@@ -7,12 +7,13 @@ import Navbar from './components/Navbar';
 import DaftarManga from './components/DaftarManga';
 import Search from './pages/Search';
 import AnimeRecommendation from './components/RekomendasiAnime';
+import TopCharacters from './components/TopCharacters';
 import NotFound from './components/NotFound';
 
 export default function App() {
-  const [animeData, setAnimeData] = useState("");
-  const [mangaData, setMangaData] = useState("");
-  const [rekomendasiAnimeData, setRekomendasiAnimeData] = useState("");
+  const [animeData, setAnimeData] = useState([]);
+  const [mangaData, setMangaData] = useState([]);
+  const [rekomendasiAnimeData, setRekomendasiAnimeData] = useState();
 
   useEffect(() => {
     const fetchAnime = async () => {
@@ -20,7 +21,10 @@ export default function App() {
         const topAnime = await getAnimeResponse('top/anime', 'limit=8');
         setAnimeData(topAnime);
 
-        const topManga = await getAnimeResponse('top/manga', 'limit=8')
+        // Penundaan 1 detik antara permintaan
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        const topManga = await fetchMangaWithRetry();
         setMangaData(topManga);
 
         let rekomendasiAnime = await getAnimeRekomendasi("recommendations/anime", "entry");
@@ -33,6 +37,26 @@ export default function App() {
     };
     fetchAnime();
   }, []);
+
+  // Fungsi untuk mengambil data top manga dengan penanganan retry
+  const fetchMangaWithRetry = async () => {
+    let retryCount = 0;
+    while (true) {
+      try {
+        const topManga = await getAnimeResponse('top/manga', 'limit=8');
+        return topManga;
+      } catch (error) {
+        if (error.response.status === 429 && retryCount < 3) {
+          // Jika respons adalah 429 Too Many Requests, tunggu waktu yang semakin lama sebelum mencoba lagi
+          const waitTime = Math.pow(2, retryCount) * 1000; // Backoff eksponensial
+          await new Promise(resolve => setTimeout(resolve, waitTime));
+          retryCount++;
+        } else {
+          throw error; // Lepaskan kesalahan jika bukan 429 atau sudah mencoba beberapa kali
+        }
+      }
+    }
+  };
 
   return (
     <BrowserRouter>
