@@ -6,8 +6,8 @@ import Header from './components/DaftarAnime/Header';
 import Navbar from './components/Navbar';
 import DaftarManga from './components/DaftarManga';
 import Search from './pages/Search';
+import Populer from './pages/Populer';
 import AnimeRecommendation from './components/RekomendasiAnime';
-import TopCharacters from './components/TopCharacters';
 import NotFound from './components/NotFound';
 
 export default function App() {
@@ -70,7 +70,7 @@ export default function App() {
                 <DaftarAnime api={animeData} />
               </section>
               <section>
-                <Header title="Top Manga" />
+                <Header title="Top Manga" linkTitle="See all Top Manga" linkHref="/top-manga" />
                 <DaftarManga api={mangaData} />
               </section>
               <section>
@@ -80,6 +80,7 @@ export default function App() {
             </>
           } />
           <Route path="/search/:keyword" element={<Search />} /> {/* Menambahkan rute untuk Search */}
+          <Route path="/populer" element={<Populer />} /> {/* Menambahkan rute untuk Populer */}
           <Route path="*" element={<NotFound />} /> {/* Menambahkan rute untuk NotFound */}
         </Routes>
       </div>
