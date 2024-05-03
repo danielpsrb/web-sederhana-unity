@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { getAnimeResponse, getTopManga, getAnimeRekomendasi, reproduce } from './api/api-services'; // Mengimpor fungsi getAnimeResponse
+import { getAnimeResponse, getAnimeRekomendasi, reproduce } from './api/api-services'; // Mengimpor fungsi getAnimeResponse
 import DaftarAnime from './components/DaftarAnime';
 import Header from './components/DaftarAnime/Header';
 import Navbar from './components/Navbar';
@@ -8,12 +8,12 @@ import DaftarManga from './components/DaftarManga';
 import Search from './pages/Search';
 import AnimeRecommendation from './components/RekomendasiAnime';
 import NotFound from './components/NotFound';
+import useSWR from 'swr';
 
 export default function App() {
   const [animeData, setAnimeData] = useState("");
   const [mangaData, setMangaData] = useState("");
   const [rekomendasiAnimeData, setRekomendasiAnimeData] = useState("");
-
 
   useEffect(() => {
     const fetchAnime = async () => {
@@ -21,7 +21,7 @@ export default function App() {
         const topAnime = await getAnimeResponse('top/anime', 'limit=8');
         setAnimeData(topAnime);
 
-        const topManga = await getTopManga();
+        const topManga = await getAnimeResponse('top/manga', 'limit=8')
         setMangaData(topManga);
 
         let rekomendasiAnime = await getAnimeRekomendasi("recommendations/anime", "entry");
