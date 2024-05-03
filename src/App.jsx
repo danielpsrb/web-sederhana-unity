@@ -8,7 +8,6 @@ import DaftarManga from './components/DaftarManga';
 import Search from './pages/Search';
 import AnimeRecommendation from './components/RekomendasiAnime';
 import NotFound from './components/NotFound';
-import useSWR from 'swr';
 
 export default function App() {
   const [animeData, setAnimeData] = useState("");
