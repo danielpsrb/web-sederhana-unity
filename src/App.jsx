@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import DaftarManga from './components/DaftarManga';
 import Search from './pages/Search';
 import Populer from './pages/Populer';
+import TopManga from './pages/TopManga';
 import AnimeRecommendation from './components/RekomendasiAnime';
 import NotFound from './components/NotFound';
 
@@ -81,6 +82,7 @@ export default function App() {
           } />
           <Route path="/search/:keyword" element={<Search />} /> {/* Menambahkan rute untuk Search */}
           <Route path="/populer" element={<Populer />} /> {/* Menambahkan rute untuk Populer */}
+          <Route path="/top-manga" element={<TopManga />} /> {/* Menambahkan rute untuk lihat semua daftar TopManga */}
           <Route path="*" element={<NotFound />} /> {/* Menambahkan rute untuk NotFound */}
         </Routes>
       </div>
